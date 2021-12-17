@@ -4,10 +4,10 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private int nextLast;
 
-    private static final int initialCapacity = 8;
+    private static final int INITIAL_CAPACITY = 8;
 
-    public ArrayDeque(){
-        items = (T[])new Object[initialCapacity];
+    public ArrayDeque() {
+        items = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
         nextFirst = items.length - 1;
         nextLast = 0;
@@ -27,7 +27,7 @@ public class ArrayDeque<T> {
         return (index + 1) % items.length;
     }
 
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         T[] newItems = (T[]) new Object[capacity];
 
         int start = plusOne(nextFirst);
@@ -63,7 +63,7 @@ public class ArrayDeque<T> {
         nextFirst = minusOne(nextFirst);
     }
 
-    public T removeLast(){
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
@@ -73,13 +73,15 @@ public class ArrayDeque<T> {
         items[nextLast] = null;
 
         if (items.length > 16 && size <= items.length / 4) {
-            resize(items.length/2);
+            resize(items.length / 2);
         }
+
+        size--;
 
         return rem;
     }
 
-    public T removeFirst(){
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
@@ -89,21 +91,23 @@ public class ArrayDeque<T> {
         items[nextFirst] = null;
 
         if (items.length > 16 && size <= items.length / 4) {
-            resize(items.length/2);
+            resize(items.length / 2);
         }
+
+        size--;
 
         return rem;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public void printArrayDeque(){
+    public void printDeque() {
         int start = plusOne(nextFirst);
         for (int i = 0; i < size; i++){
             System.out.print(items[start] + " ");

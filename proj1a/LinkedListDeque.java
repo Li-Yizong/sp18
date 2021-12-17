@@ -4,7 +4,7 @@ public class LinkedListDeque<T> {
         private Node prev;
         private Node next;
 
-        private Node(T i, Node p, Node n){
+        private Node(T i, Node p, Node n) {
             this.item = i;
             this.prev = p;
             this.next = n;
@@ -15,7 +15,7 @@ public class LinkedListDeque<T> {
     private Node sentinel;
     private int size;
 
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
@@ -56,7 +56,7 @@ public class LinkedListDeque<T> {
     }
 
     /** Removes and return the item at the back of the deque */
-    public T removeLast(){
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
@@ -72,13 +72,13 @@ public class LinkedListDeque<T> {
 
     /** Get the item at the given index */
     public T get (int index) {
-        if (index > size || index <= 0) {
+        if (index >= size || index < 0) {
             return null;
         }
 
         Node got = sentinel.next;
 
-        for(int i = 1; i < index; i++) {
+        for (int i = 0; i < index; i++) {
             got = got.next;
         }
 
@@ -90,7 +90,7 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive (int index) {
-        if (index <= 0 || index > size) {
+        if (index < 0 || index >= size) {
             return null;
         }
         Node got = sentinel.next;
@@ -98,8 +98,8 @@ public class LinkedListDeque<T> {
         return getRecursiveHelper(got, index);
     }
 
-    public T getRecursiveHelper(Node got, int index) {
-        if (index == 1) {
+    private T getRecursiveHelper(Node got, int index) {
+        if (index == 0) {
             return got.item;
         }
 
@@ -110,7 +110,7 @@ public class LinkedListDeque<T> {
         return size == 0;
     }
 
-    public void printDeque(){
+    public void printDeque() {
         Node start = sentinel.next;
 
         while (start != sentinel) {
